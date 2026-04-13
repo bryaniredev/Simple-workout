@@ -1,0 +1,486 @@
+/* ─── Design tokens ─────────────────────────────────────────── */
+:root {
+  --bg:        #0f172a;
+  --bg-card:   #1e293b;
+  --bg-item:   #263348;
+  --border:    #334155;
+  --primary:   #3b82f6;
+  --green:     #10b981;
+  --text:      #f1f5f9;
+  --muted:     #94a3b8;
+  --tab-h:     64px;
+  --header-h:  56px;
+
+  /* per-week accent colours */
+  --w1-fg: #a5b4fc;  --w1-bg: rgba(165,180,252,.15);
+  --w2-fg: #60a5fa;  --w2-bg: rgba(96,165,250,.15);
+  --w3-fg: #fb923c;  --w3-bg: rgba(251,146,60,.15);
+  --w4-fg: #f87171;  --w4-bg: rgba(248,113,113,.15);
+}
+
+/* ─── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ul { list-style: none; }
+button { cursor: pointer; }
+
+/* ─── Base ───────────────────────────────────────────────────── */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─── App shell ──────────────────────────────────────────────── */
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.app-header {
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -.3px;
+}
+
+/* ─── Scrollable content ─────────────────────────────────────── */
+#content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 16px calc(var(--tab-h) + 16px);
+}
+
+/* ─── Cards ──────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 12px;
+}
+
+/* ─── Week card ──────────────────────────────────────────────── */
+.week-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.week-badge.w1 { background: var(--w1-bg); color: var(--w1-fg); }
+.week-badge.w2 { background: var(--w2-bg); color: var(--w2-fg); }
+.week-badge.w3 { background: var(--w3-bg); color: var(--w3-fg); }
+.week-badge.w4 { background: var(--w4-bg); color: var(--w4-fg); }
+
+#week-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+#week-goal {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ─── Progress bar ───────────────────────────────────────────── */
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.progress-label { font-size: 13px; color: var(--muted); }
+.progress-count  { font-size: 13px; font-weight: 600; color: var(--text); }
+
+.progress-bar {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 4px;
+  width: 0%;
+  transition: width .5s ease;
+}
+
+/* ─── Focus tip card ─────────────────────────────────────────── */
+.focus-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(59,130,246,.08);
+  border: 1px solid rgba(59,130,246,.2);
+}
+.focus-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: var(--primary);
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+#week-focus {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+/* ─── Done-today banner ──────────────────────────────────────── */
+.done-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 28px 20px;
+  background: rgba(16,185,129,.08);
+  border: 1px solid rgba(16,185,129,.3);
+}
+.done-icon {
+  font-size: 42px;
+  color: var(--green);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.done-title { font-size: 16px; font-weight: 600; color: var(--green); }
+.done-sub   { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+/* ─── Exercise list ──────────────────────────────────────────── */
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.exercise-list { display: flex; flex-direction: column; gap: 8px; }
+
+.exercise-item { border-radius: 12px; }
+.exercise-item.is-checked .ex-name { text-decoration: line-through; opacity: .6; }
+
+.ex-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: var(--bg-item);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .15s;
+  user-select: none;
+}
+.ex-label:active { background: var(--border); }
+
+/* Hide native checkbox visually but keep it accessible */
+.ex-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Custom circular checkbox */
+.ex-check-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2.5px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s, border-color .2s;
+  position: relative;
+}
+.ex-input:checked ~ .ex-check-box {
+  background: var(--green);
+  border-color: var(--green);
+}
+/* Checkmark via pseudo-element */
+.ex-input:checked ~ .ex-check-box::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 11px;
+  border: 2.5px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) translate(-1px, -2px);
+}
+
+.ex-info { flex: 1; min-width: 0; }
+.ex-name   { display: block; font-size: 15px; font-weight: 600; transition: opacity .2s; }
+.ex-detail { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+/* Disabled state (day already complete) */
+.ex-label.disabled { cursor: default; }
+.ex-label.disabled:active { background: var(--bg-item); }
+
+/* ─── Bottom tab bar ─────────────────────────────────────────── */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  height: var(--tab-h);
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  display: flex;
+  z-index: 100;
+}
+
+.tab-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+  transition: color .15s;
+}
+.tab-btn.active { color: var(--primary); }
+.tab-btn svg { width: 22px; height: 22px; }
+
+/* ─── Congrats overlay ───────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s;
+  padding: 24px;
+}
+.overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.overlay-card {
+  background: var(--bg-card);
+  border-radius: 24px;
+  padding: 36px 28px;
+  text-align: center;
+  width: 100%;
+  max-width: 320px;
+  transform: scale(.9);
+  transition: transform .3s;
+}
+.overlay.visible .overlay-card { transform: scale(1); }
+
+.confetti-emoji {
+  font-size: 56px;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.overlay-card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.overlay-sub {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.level-up-inner {
+  background: rgba(16,185,129,.1);
+  border: 1px solid rgba(16,185,129,.3);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 20px;
+}
+.level-up-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+#level-up-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.btn-primary {
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: opacity .15s;
+  margin-top: 4px;
+}
+.btn-primary:active { opacity: .8; }
+
+/* ─── Calendar ───────────────────────────────────────────────── */
+.cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+#cal-title { font-size: 17px; font-weight: 600; }
+
+.cal-nav-btn {
+  background: var(--bg-item);
+  border: none;
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s;
+}
+.cal-nav-btn:active { background: var(--border); }
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+
+.cal-day-hdr {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  padding: 4px 0 8px;
+  letter-spacing: .5px;
+}
+
+.cal-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 50%;
+}
+.cal-cell.completed {
+  background: var(--green);
+  color: #fff;
+  font-weight: 600;
+}
+.cal-cell.is-today:not(.completed) {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
+.cal-cell.is-today.completed {
+  box-shadow: 0 0 0 2px var(--green), 0 0 0 4px var(--bg-card);
+}
+
+.cal-legend {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.cal-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.legend-completed { background: var(--green); }
+.legend-today     { border: 2px solid var(--primary); }
+
+/* ─── Stats card ─────────────────────────────────────────────── */
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+.stat-num {
+  display: block;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text);
+}
+.stat-lbl {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ─── Notification banner ────────────────────────────────────── */
+.notification {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-110%);
+  width: 100%;
+  max-width: 480px;
+  background: #92400e;
+  color: #fff;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 300;
+  transition: transform .35s ease;
+}
+.notification.visible { transform: translateX(-50%) translateY(0); }
+
+#notif-text  { font-size: 14px; line-height: 1.4; flex: 1; }
+#notif-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+}

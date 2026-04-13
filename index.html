@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Workout Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+
+        <!-- Drop-level notification banner -->
+        <div id="notification" class="notification">
+            <p id="notif-text"></p>
+            <button id="notif-close" aria-label="Close">×</button>
+        </div>
+
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="app-title">Workout Tracker</h1>
+        </header>
+
+        <!-- Scrollable content -->
+        <div id="content">
+
+            <!-- ── Workout view ── -->
+            <div id="workout-view" class="view">
+
+                <div class="card week-card">
+                    <span class="week-badge" id="week-badge">WEEK 1</span>
+                    <h2 id="week-title"></h2>
+                    <p id="week-goal"></p>
+                </div>
+
+                <div class="card">
+                    <div class="progress-header">
+                        <span class="progress-label">Level Progress</span>
+                        <span id="days-count" class="progress-count">0 / 7 days</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+
+                <div class="card focus-card">
+                    <span class="focus-label">FOCUS</span>
+                    <p id="week-focus"></p>
+                </div>
+
+                <!-- Shown only after today is marked complete -->
+                <div class="card done-card" id="done-today" hidden>
+                    <div class="done-icon">✓</div>
+                    <p class="done-title">Today's workout complete!</p>
+                    <p class="done-sub">Come back tomorrow</p>
+                </div>
+
+                <div class="card exercises-card">
+                    <h3 class="section-title">Today's Exercises</h3>
+                    <ul id="exercise-list" class="exercise-list"></ul>
+                </div>
+
+            </div>
+
+            <!-- ── Calendar view ── -->
+            <div id="calendar-view" class="view" hidden>
+
+                <div class="card">
+                    <div class="cal-nav">
+                        <button id="prev-month" class="cal-nav-btn">&#8249;</button>
+                        <h3 id="cal-title"></h3>
+                        <button id="next-month" class="cal-nav-btn">&#8250;</button>
+                    </div>
+                    <div id="cal-grid" class="cal-grid"></div>
+                    <div class="cal-legend">
+                        <div class="cal-legend-item">
+                            <div class="legend-dot legend-completed"></div>
+                            <span>Completed</span>
+                        </div>
+                        <div class="cal-legend-item">
+                            <div class="legend-dot legend-today"></div>
+                            <span>Today</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card stats-card">
+                    <h3 class="section-title">Stats</h3>
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <span class="stat-num" id="stat-total">0</span>
+                            <span class="stat-lbl">Total Days</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num" id="stat-streak">0</span>
+                            <span class="stat-lbl">Day Streak</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num" id="stat-week">1</span>
+                            <span class="stat-lbl">Current Week</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom tab bar -->
+        <nav class="tab-bar">
+            <button class="tab-btn active" data-tab="workout">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 11l3 3L22 4"/>
+                    <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                </svg>
+                <span>Workout</span>
+            </button>
+            <button class="tab-btn" data-tab="calendar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span>Calendar</span>
+            </button>
+        </nav>
+
+        <!-- Congratulations overlay -->
+        <div id="congrats-overlay" class="overlay">
+            <div class="overlay-card">
+                <div class="confetti-emoji">🎉</div>
+                <h2>Workout Complete!</h2>
+                <p class="overlay-sub">Congratulations! You've completed today's workout.</p>
+                <div id="level-up-msg" hidden>
+                    <div class="level-up-inner">
+                        <div class="level-up-badge">LEVEL UP!</div>
+                        <p id="level-up-text"></p>
+                    </div>
+                </div>
+                <button id="dismiss-btn" class="btn-primary">Awesome!</button>
+            </div>
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
